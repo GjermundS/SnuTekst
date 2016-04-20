@@ -3,20 +3,35 @@ package snuTekst;
 import java.util.Scanner;
 
 public class SnuTekst {
+	private int teller;
 	
-	public static void baklengs(String tekst){
-		System.out.print(tekst.charAt(tekst.length()-1));
-		if(tekst.length()>1)
-			baklengs(tekst.substring(0, tekst.length()-1));
+	SnuTekst(){
+		teller=0;
+	}
+	
+	public void baklengs(String tekst){
+		//Litt usikker på hva oppgaveteksten vil ha meg til å gjøre
+		while (teller<tekst.length()){
+			baklengs(tekst,teller);
+		}
+	}
+	
+	public void baklengs(String tekst, int nummer){
+		this.teller++;
+		System.out.print(tekst.charAt(tekst.length()-nummer-1));
+		baklengs(tekst);
 	}
 
 	public static void main(String[] args) {
-		@SuppressWarnings("resource")
-		Scanner input = new Scanner(System.in);
-		String tekst = input.nextLine();
-		System.out.print("\n"+ tekst + " er: ");
-		baklengs(tekst);
-		System.out.println(" baklengs");
+		while(true){
+			System.out.println("Skriv in tekst");
+			@SuppressWarnings("resource")
+			Scanner input = new Scanner(System.in);
+			String tekst = input.nextLine();
+			System.out.print("\n"+ tekst + " baklengs er: ");
+			SnuTekst snu = new SnuTekst();
+			snu.baklengs(tekst);
+			System.out.println("\n");
+		}	
 	}
-
 }
